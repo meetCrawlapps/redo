@@ -9,7 +9,10 @@ import {
 import Image from "next/image";
 import Button from "./button";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useAuth } from "@clerk/nextjs";
 export function Navbar() {
+  const { userId } = useAuth();
   const router = useRouter();
   const [active, setActive] = useState<string | null>(null);
   return (
@@ -92,12 +95,22 @@ export function Navbar() {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <div onClick={() => router.push("/dashboard")}>
-            <Button name="Dashboard" classNameprops="dark:text-white" />
-          </div>
-          <div className="relative w-[50px] h-[50px] rounded-full overflow-hidden border-2 border-gray-600">
-            <Image src="/user.jpg" alt="user" fill />
-          </div>
+          {!userId ? (
+            <>
+              <Link href="/sign-up">
+                <Button name="SignUp" classNameprops="dark:text-white" />
+              </Link>
+              <Link href="/sign-in">
+                <Button name="Login" classNameprops="dark:text-white" />
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href="/dashboard">
+                <Button name="Dashboard" classNameprops="dark:text-white" />
+              </Link>
+            </>
+          )}
         </div>
       </Menu>
     </div>

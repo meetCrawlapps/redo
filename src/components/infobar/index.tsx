@@ -8,10 +8,11 @@ import {
   TooltipTrigger,
 } from "../shadecn/ui/tooltip";
 import { Input } from "../shadecn/ui/input";
+import { useAuth, UserButton } from "@clerk/nextjs";
 
 type Props = {};
-
 const InfoBar = (props: Props) => {
+  const { userId } = useAuth();
   return (
     <div className="flex flex-row justify-end gap-6 items-center px-4 py-4 w-full dark:bg-black sticky top-0">
       <span className="flex items-center gap-2 font-bold">
@@ -45,6 +46,12 @@ const InfoBar = (props: Props) => {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
+      {userId && (
+        <>
+          <UserButton />
+        </>
+      )}
+      <div></div>
     </div>
   );
 };
