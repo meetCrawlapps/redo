@@ -12,6 +12,7 @@ import {
 } from "@/components/shadecn/ui/drawer";
 import { Button } from "@/components/shadecn/ui/button";
 import { Plus } from "lucide-react";
+import AddWorkflow from "@/components/forms/addWorkflow";
 
 const CustomeModel = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,20 +26,16 @@ const CustomeModel = () => {
           </Button>
         </DrawerTrigger>
         <DrawerContent>
-          <div className="mx-auto w-full max-w-sm">
+          <div className="mx-auto w-full max-w-md">
             <DrawerHeader>
-              <DrawerTitle>Move Goal</DrawerTitle>
+              <DrawerTitle>Create a Workflow Automation</DrawerTitle>
               <DrawerDescription>
-                Set your daily activity goal.
+                workflow are powerfull that help you automate tasks.
               </DrawerDescription>
             </DrawerHeader>
-            <div className="p-4 pb-0"></div>
-            <DrawerFooter>
-              <Button>Submit</Button>
-              <DrawerClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DrawerClose>
-            </DrawerFooter>
+            <div className="p-4">
+              <AddWorkflow />
+            </div>
           </div>
         </DrawerContent>
       </Drawer>

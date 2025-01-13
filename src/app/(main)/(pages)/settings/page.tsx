@@ -1,9 +1,13 @@
-import { useUser } from "@clerk/clerk-react";
-import Profileform from "@/components/forms/profile-form";
+"use client"; // is needed only if you’re using React Server Components
+import Profileform from "@/components/forms/editProfile";
 import React from "react";
+import { FileUploaderRegular } from "@uploadcare/react-uploader";
+import "@uploadcare/react-uploader/core.css";
 import Profilepicture from "./_components/profile-picture";
-
-const SettingsPage = () => {
+// import { currentUser } from "@clerk/nextjs/server";
+const SettingsPage = async () => {
+  console.log("global--------", global);
+  // const user = await currentUser();
   return (
     <div className="flex flex-col gap-4">
       <h1 className="sticky top-0 z-10 flex items-center justify-between border-b p-6 text-4xl backdrop-blur-lg">
@@ -16,16 +20,15 @@ const SettingsPage = () => {
             Add or update your information
           </p>
         </div>
-        <Profilepicture
-          userimage="/user.jpg"
-          // onDelete={removeProfileImage}
-          // userImage={user?.profileImage || ''}
-          // onUpload={uploadProfileImage}
-        />
-        <Profileform
-        // user={user}
-        // onUpdate={updateUserInfo}
-        />
+        <div>
+          <FileUploaderRegular
+            sourceList="local, url, camera, dropbox"
+            classNameUploader="uc-dark uc-purple"
+            pubkey={process.env.UPLOADCARE_PUBLIC_KEY}
+          />
+        </div>
+        {/* <Profilepicture userimage="/user.jpg" /> */}
+        <Profileform />
       </div>
     </div>
   );
